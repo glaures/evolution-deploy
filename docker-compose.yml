@@ -16,7 +16,7 @@ services:
 
   backend:
     build:
-      context: https://github.com/your-org/evolution-backend.git#${GIT_BRANCH:-main}
+      context: https://github.com/glaures/evolution-backend.git#${GIT_BRANCH:-main}
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/evolution
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
@@ -30,7 +30,7 @@ services:
 
   frontend:
     build:
-      context: https://github.com/your-org/evolution-frontend.git#${GIT_BRANCH:-main}
+      context: https://github.com/glaures/evolution-frontend.git#${GIT_BRANCH:-main}
       args:
         NUXT_PUBLIC_API_BASE_URL: /api
         NUXT_PUBLIC_ENTRA_CLIENT_ID: ${ENTRA_CLIENT_ID}
