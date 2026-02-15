@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: evolution
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+
+  backend:
+    build:
+      context: https://github.com/your-org/evolution-backend.git#${GIT_BRANCH:-main}
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/evolution
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SPRING_PROFILES_ACTIVE: prod
+      ENTRA_CLIENT_ID: ${ENTRA_CLIENT_ID}
+      ENTRA_TENANT_ID: ${ENTRA_TENANT_ID}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: https://github.com/your-org/evolution-frontend.git#${GIT_BRANCH:-main}
+      args:
+        NUXT_PUBLIC_API_BASE_URL: /api
+        NUXT_PUBLIC_ENTRA_CLIENT_ID: ${ENTRA_CLIENT_ID}
+        NUXT_PUBLIC_ENTRA_TENANT_ID: ${ENTRA_TENANT_ID}
+        NUXT_PUBLIC_ENTRA_REDIRECT_URI: ${ENTRA_REDIRECT_URI}
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  db-data:
