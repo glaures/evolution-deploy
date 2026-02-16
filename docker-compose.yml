@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   db:
     image: mysql:8
@@ -18,9 +17,9 @@ services:
     build:
       context: https://github.com/glaures/evolution-backend.git#${GIT_BRANCH:-master}
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/evolution
-      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      DB_URL: jdbc:mysql://db:3306/evolution?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Berlin
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
       SPRING_PROFILES_ACTIVE: prod
       ENTRA_CLIENT_ID: ${ENTRA_CLIENT_ID}
       ENTRA_TENANT_ID: ${ENTRA_TENANT_ID}
