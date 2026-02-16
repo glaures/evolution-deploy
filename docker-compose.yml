@@ -31,7 +31,7 @@ services:
     build:
       context: https://github.com/glaures/evolution-frontend.git#${GIT_BRANCH:-master}
       args:
-        NUXT_PUBLIC_API_BASE_URL: /api
+        NUXT_PUBLIC_API_BASE_URL: ""
         NUXT_PUBLIC_ENTRA_CLIENT_ID: ${ENTRA_CLIENT_ID}
         NUXT_PUBLIC_ENTRA_TENANT_ID: ${ENTRA_TENANT_ID}
         NUXT_PUBLIC_ENTRA_REDIRECT_URI: ${ENTRA_REDIRECT_URI}
