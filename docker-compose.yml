@@ -23,6 +23,7 @@ services:
       SPRING_PROFILES_ACTIVE: prod
       ENTRA_CLIENT_ID: ${ENTRA_CLIENT_ID}
       ENTRA_TENANT_ID: ${ENTRA_TENANT_ID}
+      CORS_ORIGINS: ${CORS_ORIGINS:http://localhost:3000}
     depends_on:
       db:
         condition: service_healthy
