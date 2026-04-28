@@ -12,6 +12,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       retries: 5
+    ports:
+      - "127.0.0.1:3306:3306"
 
   backend:
     build:
