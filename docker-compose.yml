@@ -26,6 +26,9 @@ services:
       ENTRA_CLIENT_ID: ${ENTRA_CLIENT_ID}
       ENTRA_TENANT_ID: ${ENTRA_TENANT_ID}
       CORS_ORIGINS: ${CORS_ORIGINS}
+      JIRA_BASE_URL: ${JIRA_BASE_URL}
+      JIRA_USER_EMAIL: ${JIRA_USER_EMAIL}
+      JIRA_API_TOKEN: ${JIRA_API_TOKEN}
     depends_on:
       db:
         condition: service_healthy
